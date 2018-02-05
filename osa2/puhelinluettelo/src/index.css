@@ -1,0 +1,31 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+.error {
+  color: rgba(241, 24, 24, 0.788);
+  background: rgba(236, 229, 229, 0.616);
+  font-size: 16px;
+  border-style: solid;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+  width: fit-content;
+}
+
+.notif {
+  color: rgba(24, 241, 42, 0.788);
+  background: rgba(236, 229, 229, 0.616);
+  font-size: 16px;
+  border-style: solid;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+  width: fit-content;
+}
+
+.container {
+  margin-left: 10px;
+}
