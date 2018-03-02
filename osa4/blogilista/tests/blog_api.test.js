@@ -2,7 +2,7 @@ const supertest = require('supertest')
 const { app, server } = require('../index')
 const api = supertest(app)
 const Blog = require('../models/blog')
-const { blogs, blogsInDb, usersInDb } = require('./test_helper')
+const { blogs, blogsInDb } = require('./test_helper')
 
 beforeAll(async () => {
     await Blog.remove({})
@@ -118,29 +118,6 @@ test('update blog', async () => {
 
     expect(response.length).toBe(initialBlogs.length)
     expect(updatedBlog.likes).toBe(initialLikes + 1)
-})
-
-test('POST a new user', async () => {
-    const usersBeforeOperation = await usersInDb()
-
-    const newUser = {
-        username: 'mluukkai',
-        name: 'Matti Luukkainen',
-        password: 'salainen',
-        age: true
-    }
-
-    await api
-        .post('/api/users')
-        .send(newUser)
-        .expect(200)
-        .expect('Content-Type', /application\/json/)
-
-    const usersAfterOperation = await usersInDb()
-    const usernames = usersAfterOperation.map(u=>u.username)
-
-    expect(usersAfterOperation.length).toBe(usersBeforeOperation.length + 1)
-    expect(usernames).toContain(newUser.username)
 })
 
 
