@@ -1,0 +1,21 @@
+#notif {
+    color: green;
+    border: 1px solid green;
+}
+
+#error {
+    color: red;
+    border: 1px solid red;
+}
+
+.cont {
+    border: 1px solid black;
+}
+
+#additional {
+    padding-left: 7px;
+}
+
+#hide {
+    display: none;
+}
