@@ -1,6 +1,6 @@
 
 import React from 'react'
-import { Container, Table, Grid, Image, Form, Button, Icon, List } from 'semantic-ui-react'
+import { Container, Table, Grid, Image, Form, Button, Icon, List, Segment, Message } from 'semantic-ui-react'
 import { BrowserRouter as Router, Route, Link, NavLink } from 'react-router-dom'
 
 const Menu = () => {
@@ -23,7 +23,7 @@ const Menu = () => {
   }
 
   return (
-    <div style={menu}>    
+    <div style={menu}>   
       <NavLink exact to="/anecdotes" activeStyle={active}>anecdotes</NavLink>&nbsp;
       <NavLink exact to="/create" activeStyle={active}>create new</NavLink>&nbsp;
       <NavLink exact to="/about" activeStyle={active}>about</NavLink>&nbsp;
@@ -46,7 +46,7 @@ const AnecdoteList = ({ anecdotes }) => (
 const About = () => (
   <div>
     <h2><Icon name='info' /> About anecdote app</h2>
-    <Grid columns={2} divided>
+    <Grid columns={2} divided stackable>
       <p>Software engineering is full of excellent anecdotes, at this app you can find the best and add more.</p>
       <Grid.Row>
       <Grid.Column>
@@ -102,8 +102,9 @@ class CreateNew extends React.Component {
 
   render() {
     return(
-      <div>
-        <h2><Icon name='edit' /> create a new anecdote</h2>
+      <Grid columns={2}>
+        <Grid.Column>
+        <h2><Icon name='edit' /> Create a new anecdote</h2>
         <Form onSubmit={this.handleSubmit}>
           <div>
             <Form.Input name='content' label='content' value={this.state.content} onChange={this.handleChange}  />
@@ -116,7 +117,8 @@ class CreateNew extends React.Component {
           </div>
           <Button style={{marginTop: 10}} basic color='teal' content='Teal' type='submit'>create</Button>
         </Form>
-      </div>  
+        </Grid.Column>
+      </Grid>  
     )
 
   }
@@ -124,19 +126,21 @@ class CreateNew extends React.Component {
 
 const Anecdote = ({ anecdote }) => {
   return(
-    <List animated verticalAlign='middle'>
-      <List.Item>
-        <List.Header><Icon name='pencil' /> {anecdote.content}</List.Header></List.Item>
-      <List.Item>
-        <Icon name='user outline' />{anecdote.author}
-      </List.Item>
-      <List.Item>
-        <a style={{color: 'black'}} href={anecdote.info}><Icon name='linkify'/> {anecdote.info}</a>
-      </List.Item>
-      <List.Item>
-        <Icon name='like outline' />{anecdote.votes} votes
-      </List.Item>
-    </List>
+    <Segment>
+      <List animated verticalAlign='middle'>
+        <List.Item>
+          <List.Header><Icon name='pencil' /> {anecdote.content}</List.Header></List.Item>
+        <List.Item>
+          <Icon name='user outline' />{anecdote.author}
+        </List.Item>
+        <List.Item>
+          <a style={{color: 'black'}} href={anecdote.info}><Icon name='linkify'/> {anecdote.info}</a>
+        </List.Item>
+        <List.Item>
+          <Icon name='like outline' />{anecdote.votes} votes
+        </List.Item>
+      </List>
+    </Segment>
   )
 }
 
@@ -212,7 +216,8 @@ class App extends React.Component {
         <div>
         <h1>Software anecdotes</h1>
           <Menu />
-          { this.state.notification === '' ? <div></div>: <div style={notifStyle}> {this.state.notification} </div> }
+          { this.state.notification === '' ? <div></div>: <Message style={notifStyle}>{this.state.notification} </Message> }
+          
           <Route exact path="/(anecdotes|)/" render={() => 
             <AnecdoteList anecdotes={this.state.anecdotes} />} 
           />
